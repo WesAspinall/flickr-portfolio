@@ -1,4 +1,5 @@
 import gulp from 'gulp';
+import babel from 'gulp-babel';
 import concat from 'gulp-concat';
 import wrap from 'gulp-wrap';
 import uglify from 'gulp-uglify';
@@ -17,6 +18,7 @@ import chalk from 'chalk';
 import child from 'child_process';
 import sourcemaps from 'gulp-sourcemaps';
 import notify from 'gulp-notify';
+import gutil from 'gulp-util';
 
 const exec = child.exec;
 const argv = yargs.argv;
@@ -107,11 +109,12 @@ gulp.task('scripts', ['modules'], () => {
       './templates.js'
     ])
     .pipe(sourcemaps.init())
+    .pipe(babel())
     .pipe(wrap('(function(angular){\n\'use strict\';\n<%= contents %>})(window.angular);'))
     .pipe(concat('bundle.js'))
     .pipe(ngAnnotate())
     .pipe(gulpif(argv.deploy, uglify()))
-    .pipe(sourcemaps.write('./'))
+    .on('error', gutil.log)
     .pipe(gulp.dest(paths.dist + 'js/'));
 });
 
@@ -149,5 +152,6 @@ gulp.task('default', [
 
 gulp.task('production', [
   'copy',
-  'scripts'
+  'scripts',
+  'styles'
 ]);
