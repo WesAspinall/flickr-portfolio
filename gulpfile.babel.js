@@ -32,7 +32,11 @@ const paths = {
   modules: [
     'angular/angular.js',
     'angular-ui-router/release/angular-ui-router.js',
-    'angular-loading-bar/build/loading-bar.min.js'
+    'angular-loading-bar/build/loading-bar.min.js',
+    'angular-animate/angular-animate.min.js',
+    'angular-touch/angular-touch.min.js',
+    'angular-ui-bootstrap/dist/ui-bootstrap.js',
+    'angular-ui-bootstrap/dist/ui-bootstrap-tpls.js'
   ],
   static: [
     `${root}/index.html`,
@@ -58,11 +62,13 @@ gulp.task('clean', cb => del(paths.dist + '**/*', cb));
 
 gulp.task('templates', () => {
   return gulp.src(paths.templates)
-    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(htmlmin({
+      collapseWhitespace: true
+    }))
     .pipe(templateCache({
       root: 'app',
       standalone: true,
-      transformUrl: function (url) {
+      transformUrl: function(url) {
         return url.replace(path.dirname(url), '.');
       }
     }))
@@ -72,17 +78,17 @@ gulp.task('templates', () => {
 
 //linting
 gulp.task('style:js', () => {
-    return gulp.src('./src/**/*.js')
-        .pipe(eslint())
-        .pipe(eslint.format())
+  return gulp.src('./src/**/*.js')
+    .pipe(eslint())
+    .pipe(eslint.format())
 });
 
 gulp.task('hint:html', () => {
-    return gulp.src('./src/**/*.html')
-        .pipe(htmlhint('.htmlhintrc'))
-        .pipe(htmlhint.failReporter());
+  return gulp.src('./src/**/*.html')
+    .pipe(htmlhint('.htmlhintrc'))
+    .pipe(htmlhint.failReporter());
 });
- 
+
 gulp.task('lint', ['style:js', 'hint:html']);
 //end linting
 
@@ -96,7 +102,9 @@ gulp.task('modules', ['templates'], () => {
 
 gulp.task('styles', () => {
   return gulp.src(paths.styles)
-    .pipe(sass({outputStyle: 'compressed'}))
+    .pipe(sass({
+      outputStyle: 'compressed'
+    }))
     .on('error', handleError)
     .pipe(gulp.dest(paths.dist + 'css/'));
 });
@@ -131,7 +139,9 @@ gulp.task('serve', () => {
 });
 
 gulp.task('copy', ['clean'], () => {
-  return gulp.src(paths.static, { base: 'src' })
+  return gulp.src(paths.static, {
+      base: 'src'
+    })
     .pipe(gulp.dest(paths.dist));
 });
 

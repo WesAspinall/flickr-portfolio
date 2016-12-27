@@ -1,9 +1,25 @@
-<div class='sidebar'>
-  <span>hero</span>
-  <span>contact</span>
-  <span>blog</span>
-  <hr>
-  <span>facebook</span>
-  <span>insta</span>
-  <span>twitter</span>
+<div id="sidebar-wrapper">
+  <div class="sidebar-nav collapse navbar-collapse" uib-collapse="navCollapsed">
+    <ul>
+      <li class="sidebar-brand">
+          <a href="#">
+              <img src='http://placehold.it/200x100'>
+          </a>
+      </li> 
+    </ul>
+    <ul>
+      <li ng-repeat='tag in $ctrl.tags' class="sidebar-brand">
+          <a href="#">
+              {{tag.label}}
+          </a>
+      </li>
+    </ul>
+    <ul class='social-links'>
+      <li ng-repeat='link in $ctrl.socialLinks' class="sidebar-brand">
+          <a href="#">
+              {{link.label}}
+          </a>
+      </li> 
+    </ul>
+  </div>
 </div>

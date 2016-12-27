@@ -1,24 +1,25 @@
 var FlickrCtrl = function(FlickrService) {
   var ctrl = this;
-  ctrl.albumList = [];
-  ctrl.miamiPhotos = [];
+  ctrl.feat = [];
+  ctrl.featTitle = '';
   ctrl.getPhotos = getPhotos;
-  ctrl.getList = getList;
   ctrl.activate = activate;
   activate();
 
+
   function activate() {
     getPhotos();
-    getList();
+    // getList();
   }
 
   function getPhotos() {
     FlickrService.getPhotos().then((res) => {
+      ctrl.featTitle = res.title;
       return res;
     }).then((data) => {
-      data.forEach((item) => {
-        ctrl.miamiPhotos.push("http://farm" + item.farm + ".static.flickr.com/" + item.server + "/" + item.id + "_" + item.secret + ".jpg");
-      });
+      data.photo.forEach(function(item) {
+        ctrl.feat.push("http://farm" + item.farm + ".static.flickr.com/" + item.server + "/" + item.id + "_" + item.secret + ".jpg");
+      })
     });
 
   }

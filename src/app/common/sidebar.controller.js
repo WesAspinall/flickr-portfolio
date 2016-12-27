@@ -1,28 +1,37 @@
 function AppSidebarCtrl() {
   var ctrl = this;
 
-  ctrl.contactTags = [{
+  ctrl.tags = [{
     label: 'All contacts',
     icon: 'star',
     state: 'none'
   }, {
-    label: 'Friends',
+    label: 'Contact',
     icon: 'people',
-    state: 'friends'
+    state: 'contact'
   }, {
-    label: 'Family',
+    label: 'Blog',
     icon: 'child_care',
     state: 'family'
-  }, {
-    label: 'Acquaintances',
-    icon: 'accessibility',
-    state: 'acquaintances'
-  }, {
-    label: 'Following',
-    icon: 'remove_red_eye',
-    state: 'following'
   }];
   
+  ctrl.socialLinks = [{
+    label: 'IG',
+    icon: 'star',
+    state: 'none'
+  }, {
+    label: 'Twitter',
+    icon: 'people',
+    state: 'contact'
+  }, {
+    label: 'GitHub',
+    icon: 'child_care',
+    state: 'family'
+  }];
+
+  ctrl.isNavCollapsed = true;
+  ctrl.isCollapsed = false;
+  ctrl.isCollapsedHorizontal = false;
 }
 
 angular

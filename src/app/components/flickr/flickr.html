@@ -1,11 +1,8 @@
-<div class='flickrAlbum'>
-  <div>
-    <ul>
-      <li 
-        ng-repeat='p in $ctrl.albumList track by $index'
-        >
-        <img ng-src='{{p}}' width='500'>
-      </li>
-    </ul>
-  </div>
+<h1>{{$ctrl.featTitle}}</h1>
+<div id='featAlbum'>
+  <ul>
+    <li ng-repeat='p in $ctrl.feat track by $index'>
+      <img  ng-src='{{p}}'>
+    </li>
+  </ul>
 </div>
